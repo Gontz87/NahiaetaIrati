@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuento Infantil Interactivo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-blue-50 h-screen flex flex-col items-center justify-center">
+    <div id="app" class="w-full max-w-3xl overflow-hidden relative bg-white rounded-lg shadow-lg">
+        <!-- Header -->
+        <header class="bg-gradient-to-r from-purple-400 to-pink-500 text-white text-center py-4">
+            <h1 class="text-3xl font-bold">El Tesoro de Nahia e Irati</h1>
+        </header>
+
+        <!-- Story Container -->
+        <div id="story-container" class="h-[70vh] p-6 text-lg leading-relaxed flex flex-col items-center justify-center">
+            <!-- Story Text -->
+            <div id="story-text" class="text-gray-800 text-center"></div>
+            <!-- Image -->
+            <img id="story-image" class="max-h-60 mt-4 rounded-lg shadow-md" alt="Cuento ilustración">
+        </div>
+
+        <!-- Navigation -->
+        <div class="flex justify-between bg-gray-100 p-4">
+            <button id="prev-btn" class="bg-blue-500 text-white px-4 py-2 rounded disabled:opacity-50" disabled>
+                ⬅️ Anterior
+            </button>
+            <button id="next-btn" class="bg-blue-500 text-white px-4 py-2 rounded">
+                Siguiente ➡️
+            </button>
+        </div>
+    </div>
+
+    <script>
+        const story = [
+            {
+                text: "Nahia y su mejor amiga Irati vivían en un mundo mágico lleno de colores y maravillas. Nahia tenía 4 años y adoraba a los unicornios, mientras que Irati, de 6 años, amaba al hamster gatito de los dibujos de Gaby y su casa de muñecas. Juntas, disfrutaban de cada día descubriendo nuevas aventuras.",
+                image: "1.jpeg",
+            },
+            {
+                text: "Una soleada mañana, Nahia e Irati se despertaron llenas de energía y emoción. Decidieron que ese día explorarían el bosque mágico que se extendía cerca de sus casas.",
+                image: "2.jpeg",
+            },
+            {
+                text: "Caminando por un sendero lleno de flores brillantes, Nahia e Irati encontraron un unicornio. Este les contó acerca de un tesoro escondido en el bosque y les pidió ayuda para encontrarlo.",
+                image: "3.jpeg",
+            },
+            {
+                text: "Siguiendo al unicornio, Nahia e Irati se adentraron en el bosque. Encontraron pequeños retos y criaturas mágicas mientras exploraban juntos con valentía.",
+                image: "4.jpeg",
+            },
+            {
+                text: "Al encontrar una cueva secreta, el unicornio las guió hasta el lugar donde se escondía un tesoro lleno de joyas brillantes y objetos mágicos.",
+                image: "5.jpeg",
+            },
+            {
+                text: "Regresaron a casa felices y emocionadas. Compartieron su experiencia con sus familias y organizaron una fiesta para celebrar su aventura mágica.",
+                image: "6.jpeg",
+            },
+            {
+                text: "Nahia e Irati reflexionaron sobre lo aprendido: valentía, trabajo en equipo y la importancia de la amistad. Su aventura las había unido aún más.",
+                image: "7.jpeg",
+            },
+        ];
+
+        let currentPage = 0;
+
+        const storyText = document.getElementById("story-text");
+        const storyImage = document.getElementById("story-image");
+        const prevBtn = document.getElementById("prev-btn");
+        const nextBtn = document.getElementById("next-btn");
+
+        function updatePage() {
+            storyText.textContent = story[currentPage].text;
+            storyImage.src = story[currentPage].image;
+
+            // Update button states
+            prevBtn.disabled = currentPage === 0;
+            nextBtn.disabled = currentPage === story.length - 1;
+        }
+
+        prevBtn.addEventListener("click", () => {
+            if (currentPage > 0) {
+                currentPage--;
+                updatePage();
+            }
+        });
+
+        nextBtn.addEventListener("click", () => {
+            if (currentPage < story.length - 1) {
+                currentPage++;
+                updatePage();
+            }
+        });
+
+        // Initialize first page
+        updatePage();
+    </script>
+</body>
+</html>
+
